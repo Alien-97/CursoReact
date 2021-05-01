@@ -1,7 +1,9 @@
 import React from 'react';
+import CoursesList from './CoursesList';
 
 const courses = [
   {
+    id: 1,
     title: 'React - The Complete Guide (incl Hooks, React Router, Redux)',
     author: 'Maximilian Schwarzmuller',
     hours_video: 40.5,
@@ -10,6 +12,7 @@ const courses = [
     url: 'https://codingthesmartway.com/courses/react-complete-guide/',
   },
   {
+    id: 2,
     title: 'Modern React with Redux',
     author: 'Stephen Grider',
     hours_video: 47.5,
@@ -18,6 +21,7 @@ const courses = [
     url: 'https://codingthesmartway.com/courses/modern-react-with-redux/',
   },
   {
+    id: 3,
     title: 'The Complete React Developer Course (w/ Hooks and Redux)',
     author: 'Andrew Mead',
     hours_video: 39,
@@ -28,16 +32,11 @@ const courses = [
   },
 ];
 function App() {
-  function getGreetingMessage() {
-    return 'Hello, World';
-  }
   return (
     <div>
       <h1>List of Courses</h1>
       <hr />
-      {courses.map(function (course) {
-        return <div>{course.title}</div>;
-      })}
+      <CoursesList courses={courses} />
     </div>
   );
 }
