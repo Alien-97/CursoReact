@@ -31,14 +31,27 @@ const courses = [
       'http://codingthesmartway.net/courses/complete-react-web-app-developer/',
   },
 ];
-function App() {
+const App = () => {
+  const handleSearchInputChange = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <div>
       <h1>List of Courses</h1>
       <hr />
+
+      <label htmlFor="searchInput">Search: </label>
+      <input
+        id="searchInput"
+        type="text"
+        onChange={handleSearchInputChange}
+        onKeyPress={handleSeachInputKeyPress}
+      />
+
       <CoursesList courses={courses} />
     </div>
   );
-}
+};
 
 export default App;

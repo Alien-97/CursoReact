@@ -1,7 +1,7 @@
 import React from 'react';
 
-function CoursesList(props) {
-  return props.courses.map(function (course) {
+const CoursesList = ({ courses }) => {
+  return courses.map((course) => {
     return (
       <div key={course.id}>
         <span>
@@ -20,6 +20,6 @@ function CoursesList(props) {
       </div>
     );
   });
-}
+};
 
 export default CoursesList;
