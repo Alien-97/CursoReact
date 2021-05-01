@@ -1,10 +1,15 @@
 import React from 'react';
 
 function App() {
-  const greeting = 'Hello World';
+  const greetings = {
+    greeting_one: 'Hello',
+    greeting_two: 'world',
+  };
   return (
     <div>
-      <h1>{greeting}</h1>
+      <h1>
+        {greetings.greeting_one}, {greetings.greeting_two}
+      </h1>
     </div>
   );
 }
