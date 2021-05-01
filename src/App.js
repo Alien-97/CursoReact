@@ -36,6 +36,12 @@ const App = () => {
     console.log(event.target.value);
   };
 
+  const handleSearchInputKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      console.log('Enter key pressed! Search Value: ' + event.target.value);
+    }
+  };
+
   return (
     <div>
       <h1>List of Courses</h1>
@@ -46,7 +52,7 @@ const App = () => {
         id="searchInput"
         type="text"
         onChange={handleSearchInputChange}
-        onKeyPress={handleSeachInputKeyPress}
+        onKeyPress={handleSearchInputKeyPress}
       />
 
       <CoursesList courses={courses} />
