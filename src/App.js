@@ -1,15 +1,12 @@
 import React from 'react';
 
 function App() {
-  const greetings = {
-    greeting_one: 'Hello',
-    greeting_two: 'world',
-  };
+  function getGreetingMessage() {
+    return 'Hello, World';
+  }
   return (
     <div>
-      <h1>
-        {greetings.greeting_one}, {greetings.greeting_two}
-      </h1>
+      <h1>{getGreetingMessage()}</h1>
     </div>
   );
 }
