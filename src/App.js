@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CoursesList from './CoursesList';
+import Search from './Search';
 
-const courses = [
+const courses_data = [
   {
     id: 1,
     title: 'React - The Complete Guide (incl Hooks, React Router, Redux)',
@@ -32,26 +33,54 @@ const courses = [
   },
 ];
 const App = () => {
-  const [searchText, setSearchText] = useState('');
   const handleSearchInputChange = (event) => {
     setSearchText(event.target.value);
   };
 
+  const getCoursesAsync = () =>
+    new Promise((resolve) =>
+      setTimeout(() => resolve({ courses: courses_data }), 2000)
+    );
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [searchText, setSearchText] = useState(
+    localStorage.getItem('searchText') || ''
+  );
   const filteredCourses = courses.filter((course) => {
     return (
       course.title.includes(searchText) || course.author.includes(searchText)
     );
   });
 
+  const handleSearch = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('searchText', searchText);
+  }, [searchText]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getCoursesAsync().then((result) => {
+      setCourses(result.courses);
+      setIsLoading(false);
+    });
+  }, []);
   return (
     <div>
       <h1>List of Courses</h1>
       <hr />
 
-      <label htmlFor="searchInput">Search: </label>
-      <input id="searchInput" type="text" onChange={handleSearchInputChange} />
-
+      <Search value={searchText} onSearch={handleSearch} />
       <CoursesList courses={filteredCourses} />
+
+      {isLoading ? (
+        <p>Loading Courses ...</p>
+      ) : (
+        <CoursesList courses={filteredCourses} />
+      )}
     </div>
   );
 };
